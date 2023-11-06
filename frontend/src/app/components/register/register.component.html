@@ -1,0 +1,135 @@
+<div class="container">
+  <h2>Register</h2>
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="registerForm">
+      <form [formGroup]="registerForm">
+        <ng-template matStepLabel>Fill out Details</ng-template>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="text"
+            formControlName="firstname"
+            placeholder="First Name"
+            required
+          />
+          <mat-error *ngIf="registerForm.get('firstname')?.hasError('required')"
+            >First Name is required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="text"
+            formControlName="lastname"
+            placeholder="Last Name"
+            required
+          />
+          <mat-error *ngIf="registerForm.get('lastname')?.hasError('required')"
+            >Last Name is required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            required
+          />
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="registerForm.get('email')?.hasError('email')"
+            >Invalid email format</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="{{ hidePassword ? 'password' : 'text' }}"
+            formControlName="password"
+            placeholder="Password"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility()"
+          >
+            <mat-icon>{{
+              hidePassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')"
+            >Password is required</mat-error
+          >
+          <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">
+            Password must start with a letter, contain at least one capital
+            letter, one special character, and one digit
+          </mat-error>
+          <mat-error
+            *ngIf="registerForm.get('password')?.hasError('minlength')"
+          >
+            Password must be at least 8 characters long
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width"
+          (click)="onSubmit()"
+          [disabled]="loading || !registerForm.valid"
+        >
+          <span *ngIf="loading">
+            <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+          </span>
+          <span *ngIf="!loading">Register</span>
+        </button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="otpForm">
+      <form [formGroup]="otpForm" (ngSubmit)="verifyEmail()">
+        <ng-template matStepLabel>Verify Email</ng-template>
+        <p class="full-width email">{{otpForm.get('email')?.value}}</p>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            type="text"
+            formControlName="otp"
+            placeholder="OTP"
+            required
+          />
+          <mat-error *ngIf="otpForm.get('otp')?.hasError('required')"
+            >OTP is required</mat-error
+          >
+          <mat-error *ngIf="otpForm.get('otp')?.hasError('pattern')"
+            >Invalid OTP format</mat-error
+          >
+        </mat-form-field>
+
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="full-width"
+            [disabled]="loading || !otpForm.valid"
+          >
+            <span *ngIf="loading">
+              <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+            </span>
+            <span *ngIf="!loading">Verify OTP</span>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+  <div class="forgot-register-links">
+    <a mat-button routerLink="/login">Already have an account? Login</a>
+  </div>
+</div>

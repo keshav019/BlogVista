@@ -1,0 +1,24 @@
+.postCard{
+    margin: 20px;
+    cursor: pointer;
+}
+.postCard:hover{
+    transition: 0.5s ease-in-out;
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.topic{
+   margin-right: 20px;
+}
+.topic:hover{
+    color: red;
+}
+.readMoreButton{
+    color: blue;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+}
+.readMoreButton:hover{
+    color: red;
+}

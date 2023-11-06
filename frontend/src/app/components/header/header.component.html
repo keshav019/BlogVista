@@ -1,0 +1,82 @@
+<mat-toolbar class="nav" color="primary" *ngIf="!mobileView">
+  <div class="container navbar">
+    <span routerLink="/" class="logo">BlogApp</span>
+    <div class="search">
+      <button (click)="findResult()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <input
+        placeholder="search ..."
+        required
+        class="search-input"
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="findResult()"
+      />
+    </div>
+    <span class="example-spacer"></span>
+    <div class="link-list" *ngIf="!userData">
+      <a routerLink="/login" class="link-item">Login</a>
+      <a routerLink="/register" class="link-item">Register</a>
+    </div>
+
+    <div class="link-list logged" *ngIf="userData">
+      <button
+        mat-button
+        [matMenuTriggerFor]="notificationMenu"
+        class="notification"
+      >
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <mat-menu #notificationMenu="matMenu">
+        <a mat-menu-item *ngFor="let notification of notifications">
+          {{ notification }}
+        </a>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="profile">
+        {{ userData.firstname.charAt(0) }}
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <a mat-menu-item [routerLink]="userData.userId + '/profile'">Profile</a>
+        <mat-divider></mat-divider>
+        <a mat-menu-item [routerLink]="userData.userId+ '/write'">Write</a>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar class="nav" color="primary" *ngIf="mobileView">
+  <div class="container navbar">
+    <button mat-icon-button (click)="toggleMobileNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span routerLink="/" class="logo">BlogApp</span>
+    <div class="search">
+      <button (click)="openDialog()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <span class="example-spacer"></span>
+    <div class="link-list" *ngIf="!userData">
+      <a routerLink="/login" class="link-item"> Login </a>
+    </div>
+
+    <div class="link-list logged" *ngIf="userData">
+      <button
+        mat-button
+        [matMenuTriggerFor]="notificationMenu"
+        class="notification"
+      >
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <mat-menu #notificationMenu="matMenu">
+        <a mat-menu-item *ngFor="let notification of notifications">
+          {{ notification }}
+        </a>
+      </mat-menu>
+    </div>
+  </div>
+  
+</mat-toolbar>

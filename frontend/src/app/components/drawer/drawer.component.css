@@ -1,0 +1,15 @@
+.link-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.link-item {
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+.link-item:hover {
+  text-decoration: underline;
+}

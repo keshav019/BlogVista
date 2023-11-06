@@ -1,0 +1,15 @@
+.search-dialog{
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  margin-top: -10px; 
+}

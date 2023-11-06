@@ -1,0 +1,44 @@
+
+.container {
+  max-width: 400px; 
+  margin: 0 auto; 
+  margin-top: 10px;
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  background-color: #fff; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+.email {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%; 
+  }
+}
+
+h2{
+    text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.forgot-register-links {
+  display: flex;
+  margin-top: -20px;
+  align-items: center;
+  padding-left: 20px;
+}
+.forgot-register-links a:hover{
+color: blue;
+}
+
+.separator {
+  margin: 0 10px;
+}

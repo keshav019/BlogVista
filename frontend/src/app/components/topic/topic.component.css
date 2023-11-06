@@ -1,0 +1,17 @@
+.full-width{
+    width: 100%;
+}
+.otherInput{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .otherInput >mat-form-field{
+    width: 100%;
+  }
+  .otherInput >button{
+    width: 100px;
+    padding: 28px;
+    margin-top: 0px;
+    margin-left: 5px;
+  }

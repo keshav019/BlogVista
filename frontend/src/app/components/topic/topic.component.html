@@ -1,0 +1,32 @@
+<mat-spinner *ngIf="loading==true" style="height: 50px; width: 50px;"></mat-spinner>
+<div class="full-width" *ngIf="loading==false">
+    <mat-card style="margin-bottom: 20px;">
+        <mat-card-content>
+            <p *ngIf="topics.length===0" style="color: red;">Add Topics</p>
+            <button color="accent" mat-raised-button matTooltip="Remove the Topic" style="margin-right: 10px;"
+                *ngFor="let topic of topics" (click)="removeTopic(topic)">
+                {{topic.topicName}}
+            </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-form-field class="example-full-width" appearance="outline" class="full-width">
+        <mat-label>Add Topics</mat-label>
+        <input type="text" matInput [matAutocomplete]="auto" [(ngModel)]="autocompleteValue" (keyup)="filterOption()"/>
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="addTopic(option)">
+                {{ option.topicName }}
+            </mat-option>
+            <mat-option [value]="{topicId:'',topicName:'Other'}" (click)="addTopic({topicId:'',topicName:'Other'})">
+                Other
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <div class="otherInput" *ngIf="showNewTopicInput">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Topic Name</mat-label>
+            <input type="text" placeholder="Enter topic name" aria-label="Other Topic" matInput
+                [(ngModel)]="newTopicName">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addNewTopic()">Add</button>
+    </div>
+</div>

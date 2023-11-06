@@ -1,0 +1,22 @@
+<app-header
+  [userData]="userData"
+  [notifications]="notifications"
+  [mobileView]="mobileView"
+  (toggleView)="toggleView()"
+></app-header>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer position="start" mode="over">
+    <app-drawer
+      [userData]="userData"
+      [notifications]="notifications"
+      (logout)="logout()"
+    ></app-drawer>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-footer></app-footer>

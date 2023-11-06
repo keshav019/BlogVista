@@ -1,0 +1,16 @@
+<div class="search-dialog">
+  <div class="dialog-header">
+    <button mat-button mat-dialog-close class="close-button"><mat-icon>close</mat-icon></button>
+  </div>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      [(ngModel)]="searchQuery"
+      placeholder="Search..."
+      required
+    />
+    <button mat-icon-button matSuffix (click)="findResult()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

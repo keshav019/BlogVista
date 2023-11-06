@@ -1,0 +1,27 @@
+<div class="container" >
+    <mat-spinner *ngIf="loading==true" style="height: 50px; width: 50px;"></mat-spinner>
+
+    <div *ngIf="loading===false">
+        <mat-card class="postCard" style="padding: 10px;">
+            <mat-card-header class="header" >
+                <mat-card-title class="title">
+                    {{post.title}}</mat-card-title>
+                <mat-card-subtitle>Related Topics: <span class="topic"
+                        *ngFor="let topic of post?.topics">{{topic.topicName}}</span> </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div [innerHTML]="post.content"></div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button style="margin: 20px;" *ngIf="userData?.userId==post.user.userId" (click)="navigateTo(post.postId)">
+                    Edit Blog
+                </button>
+                <button mat-raised-button style="margin: 20px;" color="warn" *ngIf="userData?.userId==post.user.userId" (click)="deletePost(post.postId)">
+                    Delete Blog
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+
+</div>

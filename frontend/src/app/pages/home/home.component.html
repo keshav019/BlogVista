@@ -1,0 +1,22 @@
+<div class="container">
+    <mat-spinner *ngIf="loading==true" style="height: 50px; width: 50px;"></mat-spinner>
+
+    <div *ngIf="loading===false">
+        <mat-card class="postCard" *ngFor="let post of posts">
+            <mat-card-header (click)="navigateTo(post.postId)">
+                <mat-card-title>{{post.title}}</mat-card-title>
+                <mat-card-subtitle> <span class="topic" *ngFor="let topic of post?.topics">{{topic.topicName}}</span> </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content (click)="navigateTo(post.postId)">
+                <div [innerHTML]="post.content" style="height: 100px; overflow: hidden;"></div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button matTooltip="Save post to read later">
+                    Bookmark
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+
+</div>

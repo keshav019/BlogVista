@@ -1,0 +1,14 @@
+<div>
+  <div class="link-list" *ngIf="!userData">
+    <a  routerLink="/login" class="link-item">Login</a>
+    <a routerLink="/register" class="link-item">Register</a>
+  </div>
+
+  <div class="link-list" *ngIf="userData">
+    <a [routerLink]="userData.email + '/profile'" class="link-item">Profile</a>
+    <mat-divider></mat-divider>
+    <a  [routerLink]="userData.email + '/write'" class="link-item">Write</a>
+    <mat-divider></mat-divider>
+    <a (click)="logoutHandler()" class="link-item">Logout</a>
+  </div>
+</div>

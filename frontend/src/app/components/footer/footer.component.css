@@ -1,0 +1,43 @@
+.main-content {
+  flex-grow: 1;
+}
+
+.footer {
+  background-color: #888888;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 32px;
+}
+
+/* Style the email link */
+.contact-info a {
+  color: white;
+  text-decoration: none;
+  margin: 0;
+  font-size: 14px;
+  transition: color 0.3s ease; /* Add a smooth color transition on hover */
+}
+
+.contact-info a:hover {
+  color: #ff8300; /* Change link color to complementary color on hover */
+  background-color: #007bff; /* Add a background color on hover for aesthetic effect */
+  padding: 2px 5px; /* Adjust padding for the background color effect */
+  border-radius: 3px; /* Add a slight border-radius for a button-like appearance */
+}
+
+.social-icons a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px; /* Add spacing between social icons */
+}
+
+.social-icons a:hover {
+  color: blue; /* Change link color on hover */
+}

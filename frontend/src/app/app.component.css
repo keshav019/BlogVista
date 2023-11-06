@@ -1,0 +1,7 @@
+.content-container{
+    min-height: 100vh;
+}
+mat-drawer{
+    background-color: #3f51b5;
+    width: 200px;
+}

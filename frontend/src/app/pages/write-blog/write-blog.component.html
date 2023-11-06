@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="formWrapper">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="postData.title" required>
+    </mat-form-field>
+    <app-topic (getTopics)="getTopics($event)"></app-topic>
+    <div class="ckeditorContainer">
+      <mat-label>Content</mat-label>
+      <ckeditor [config]="editorConfig" [editor]="Editor" [(ngModel)]="postData.content" required>
+      </ckeditor>
+    </div>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+  </div>
+</div>

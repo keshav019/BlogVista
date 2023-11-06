@@ -1,0 +1,105 @@
+stages:
+  - setup
+  - build
+  - test
+  - docker
+  - deploy
+
+variables:
+  CHROME_BIN: /usr/bin/google-chrome
+
+frontend_setup:
+  image: node:latest
+  stage: setup
+  script:
+    - cd frontend
+    - npm install
+
+backend_build:
+  image: maven:3-jdk-11
+  stage: build
+  script:
+    - cd backend
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - backend/target/*.jar
+
+frontend_build:
+  image: node:latest
+  stage: build
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+
+backend_test:
+  image: maven:3-jdk-11
+  stage: test
+  script:
+    - cd backend
+    - mvn test
+
+frontend_test:
+  image: node:latest
+  stage: test
+  before_script:
+    - apt-get update
+    - apt-get install -y wget
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - apt install -y ./google-chrome*.deb
+    - export CHROME_BIN=/usr/bin/google-chrome
+  script:
+    - cd frontend
+    - npm install
+    - export CHROME_BIN=$CHROME_BIN
+    - npm run test -- --browsers=ChromeHeadlessCI --watch=false
+
+backend_docker:
+  stage: docker
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  only:
+    - main
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - cd backend
+    - docker build -t $CI_REGISTRY_USER/blogapp-backend:$IMAGE_TAGE .
+    - docker push $CI_REGISTRY_USER/blogapp-backend:$IMAGE_TAGE
+
+frontend_docker:
+  stage: docker
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  only:
+    - main
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - cd frontend
+    - docker build -t $CI_REGISTRY_USER/blogapp-frontend:$IMAGE_TAGE .
+    - docker push $CI_REGISTRY_USER/blogapp-frontend:$IMAGE_TAGE
+
+backend_deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "Deploying the backend to production..."
+
+frontend_deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "Deploying the frontend to production..."
